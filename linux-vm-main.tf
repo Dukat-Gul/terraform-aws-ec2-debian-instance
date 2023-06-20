@@ -13,7 +13,7 @@ resource "aws_eip" "linux-eip" {
 
 # Create EC2 Instance
 resource "aws_instance" "linux-server" {
-  ami                         = data.aws_ami.debian-10.id
+  ami                         = data.aws_ami.debian-11.id
   instance_type               = var.linux_instance_type
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
@@ -63,6 +63,14 @@ resource "aws_security_group" "aws-linux-sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow incoming HTTP connections"
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow incoming HTTPS connections"
   }
 
   ingress {
