@@ -2,22 +2,6 @@
 # Get latest Debian Linux AMI with Terraform #
 ##############################################
 
-# Debian 8 Jessie
-data "aws_ami" "debian-8" {
-  most_recent = true
-  owners = ["379101102735"]
-
-  filter {
-    name   = "name"
-    values = ["debian-jessie-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
 # Debian 9 Stretch
 data "aws_ami" "debian-9" {
   most_recent = true
